@@ -9,6 +9,7 @@ import { RightPanelComponent } from './right-panel/right-panel.component';
 import { TopArtistsComponent } from './top-artists/top-artists.component';
 import { PlayerCardComponent } from './player-card/player-card.component';
 import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -26,6 +27,7 @@ import { SearchComponent } from './search/search.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule
   ],
   exports: [
     MenuComponent, 

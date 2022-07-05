@@ -1,1 +1,7 @@
-<p>search works!</p>
+<input type="text" [(ngModel)]="inputSearch" placeholder="Artistas, Musicas, Playlists" (keyup.Enter)="search()">
+
+<div class="sugestoes flex">
+    <span *ngFor="let search of pesquisasRecentes" (click)="setSearch(search)">
+        {{ search }}
+    </span>
+</div>
