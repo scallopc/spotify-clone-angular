@@ -1,5 +1,5 @@
 $primary-color: #37AB00;
-$secondary-background: #FFF;
+$background-secondary: #FFF;
 $background: #FBFEF4;
 
 $transparent-black-30: #0000004D;
@@ -7,4 +7,11 @@ $transparent-black-20: #00000033;
 $transparent-black-03: #00000008;
 $transparent-black-70: #000000b3;
 
-$white: $secondary-background;
+$white: $background-secondary;
+
+// icons icomoon.io
+$s-artists: "\e900";
+$s-home: "\e90d4";
+$s-playlist: "\e905d";
+$s-search: "\e906d";
+
