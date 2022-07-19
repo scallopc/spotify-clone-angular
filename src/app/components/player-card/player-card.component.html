@@ -1,1 +1,13 @@
-<p>player-card works!</p>
+  <div class="container card p-10">
+    <div class="image">
+      <img src="{{music.album.imageUrl}}" alt="">
+    </div>
+    <div class="controls">
+      <span> {{music.title }} </span>
+      <div class="btns">
+        <i class="bi bi-skip-backward" (click)="backMusic()"></i>
+        <i class="bi bi-caret-right play-pause"></i>
+        <i class="bi bi-skip-forward"  (click)="nextMusic()"></i>
+      </div>
+    </div>
+  </div>

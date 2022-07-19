@@ -24,9 +24,9 @@ export class MenuComponent implements OnInit {
     this.router.navigateByUrl('player/home');
   }
 
-  irParaPlaylist(playlistId: string){
+  goPlaylist(playlistId: string){
     this.menuSelected = playlistId;
-    this.router.navigateByUrl(`player/lista/playlist/${playlistId}`)
+    this.router.navigateByUrl(`player/list/playlist/${playlistId}`)
   }
 
   async getPlaylists() {

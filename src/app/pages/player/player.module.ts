@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { PlayerRoutes } from './player.rounting';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { HomeComponent } from '../home/home.component';
+import { MusicListComponent } from '../music-list/music-list.component';
 
 
 
 @NgModule({
   declarations: [
     PlayerComponent,
-    HomeComponent
+    HomeComponent,
+    MusicListComponent
   ],
   imports: [
     CommonModule,

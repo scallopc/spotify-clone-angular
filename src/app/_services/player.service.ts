@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { newSong } from '../_helpers/factories';
-import { ISong } from '../_interfaces/ISong';
+import { newMusic } from '../_helpers/factories';
+import { IMusic } from '../_interfaces/IMusic';
 import { SpotifyService } from './spotify.service';
 
 @Injectable({
@@ -9,35 +9,35 @@ import { SpotifyService } from './spotify.service';
 })
 export class PlayerService {
 
-  songCurrent = new BehaviorSubject<ISong>(newSong());
+  currentMusic = new BehaviorSubject<IMusic>(newMusic());
   timerId: any = null;
 
   constructor(private spotifyService: SpotifyService) {
-    this.getSongCurrent();
+    this.getMusicCurrent();
   }
 
-  async getSongCurrent(){
+  async getMusicCurrent(){
     clearTimeout(this.timerId);
 
     // music
-    const music = await this.spotifyService.getSongCurrent();
+    const music = await this.spotifyService.getMusicCurrent();
     this.setMusicCurrent(music);
 
     //  loop
     this.timerId = setInterval(async () => {
-      await this.getSongCurrent();
+      await this.getMusicCurrent();
     }, 5000)
   }
 
-  setMusicCurrent(music: ISong){
-    this.songCurrent.next(music);
+  setMusicCurrent(music: IMusic){
+    this.currentMusic.next(music);
   }
 
-//   async previousSong(){
-//     await this.spotifyService.previousSong();
-//   }
+  async backMusic(){
+    await this.spotifyService.backMusic();
+  }
 
-//   async nextSong() {
-//     await this.spotifyService.nextSong();
-//   }
+  async nextMusic() {
+    await this.spotifyService.nextMusic();
+  }
 }

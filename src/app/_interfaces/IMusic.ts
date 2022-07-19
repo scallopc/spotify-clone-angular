@@ -1,4 +1,4 @@
-export interface ISong {
+export interface IMusic {
     id: string,
     title: string,
     artists: {

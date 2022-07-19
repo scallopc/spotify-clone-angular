@@ -24,7 +24,7 @@
         <span class="playlist-title"> PLAYLISTS </span>
 
         <div class="playlist-content">
-            <app-btn-menu *ngFor="let playlist of playlists" [description]="playlist.name" [selected]="menuSelected === playlist.id">
+            <app-btn-menu *ngFor="let playlist of playlists" [description]="playlist.name" [selected]="menuSelected === playlist.id" (click)="goPlaylist(playlist.id)">
                 <i class="s-playlist"></i>
             </app-btn-menu>
         </div>

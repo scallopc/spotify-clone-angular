@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { newSong } from 'src/app/_helpers/factories';
-import { ISong } from 'src/app/_interfaces/ISong';
+import { newArtist, newMusic } from 'src/app/_helpers/factories';
+import { IArtist } from 'src/app/_interfaces/IArtist';
+import { IMusic } from 'src/app/_interfaces/IMusic';
 import { PlayerService } from 'src/app/_services/player.service';
 import { SpotifyService } from 'src/app/_services/spotify.service';
 
@@ -12,43 +13,59 @@ import { SpotifyService } from 'src/app/_services/spotify.service';
 })
 export class HomeComponent implements OnInit {
 
-  song: ISong[] = []
-  songCurrent: ISong = newSong();
-
+  topArtist: IArtist = newArtist();
+  musics: IMusic[] = []
+  musicCurrent: IMusic = newMusic();
+  bannerImageUrl = ''; 
+  bannerText = '';
+  
   subs: Subscription[] = [];
 
   constructor(private spotifyService: SpotifyService, private playerService: PlayerService) { }
 
   ngOnInit(): void {
-    this.songs();
-    this.songsCurrent();
+    this.musicsAll();
+    this.currentMusic();
+    this.getTopartist();
   }
 
-  async songs() {
-    this.song = await this.spotifyService.getSongs();
-    console.log('music', this.song)
-
+  async musicsAll() {
+    this.musics = await this.spotifyService.getMusics();
   }
 
-  songsCurrent(){
-    const sub = this.playerService.songCurrent.subscribe(music => {
-      this.songCurrent = music;
+  currentMusic(){
+    const sub = this.playerService.currentMusic.subscribe(music => {
+      this.musicCurrent = music;
     });
 
     this.subs.push(sub);
   }
 
-  artists(song: ISong){
-    return song.artists.map(artist => artist.name).join(', ');
+  artists(music: IMusic){
+    return music.artists.map(artist => artist.name).join(', ');
   }
 
   ngOnDestroy(): void {
     this.subs.forEach(sub => sub.unsubscribe());
   }
  
-  async playMusic(music: ISong){
+  async playMusic(music: IMusic){
     await this.spotifyService.playMusic(music.id);
     this.playerService.setMusicCurrent(music);
   }
   
+  async getTopartist() {
+
+    const artist = await this.spotifyService.getTopArtists(1);
+    if (!!artist)
+      this.topArtist = artist.pop();
+      this.getDataPage(this.topArtist.name, this.topArtist.imageUrl);
+    //console.log('artista', this.topArtist)
+  }
+
+  getDataPage(bannerText: string, bannerImage: string) {
+    this.bannerImageUrl = bannerImage;
+    this.bannerText = bannerText;
+  }
+
 }

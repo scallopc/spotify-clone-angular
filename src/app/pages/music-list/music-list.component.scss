@@ -1,11 +1,10 @@
 @import "table";
-@import "variables";
 
 :host {
   display: flex; 
   justify-content: space-between;
 
-  .music-container {
+  .list {
     padding: 0px 50px;
     padding-bottom: 20px;
     width: 100%;
